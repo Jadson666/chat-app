@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation'
+import { useRouter } from 'next/navigation';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -18,7 +18,7 @@ const formSchema = z.object({
 });
 
 export default function Home() {
-  const router = useRouter()
+  const router = useRouter();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -28,11 +28,16 @@ export default function Home() {
   });
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
-    console.log(values);
-    router.push('/profile')
+    const res = await fetch('/login', { method: 'POST', body: JSON.stringify({ username: values.username }) });
+    const json = await res.json();
+
+    if (json.success) {
+      localStorage.setItem('curUser', JSON.stringify(json.user))
+      router.push('/profile');
+    }
   }
 
   return (
