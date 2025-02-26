@@ -12,7 +12,15 @@ const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CR
 
 db.serialize(() => {
   db.run(
-    'CREATE TABLE IF NOT EXISTS users (id integer PRIMARY KEY, user_name varchar(255), display_name varchar(255), created_at timestamp DEFAULT CURRENT_TIMESTAMP)'
+    `CREATE TABLE IF NOT EXISTS users (
+      id integer PRIMARY KEY,
+      user_name varchar(255),
+      display_name varchar(255),
+      country varchar(255),
+      date_of_birth date,
+      habit varchar(255),
+      created_at timestamp DEFAULT CURRENT_TIMESTAMP
+    )`
   );
   db.run(`CREATE TABLE IF NOT EXISTS
     chat_room (
@@ -41,7 +49,7 @@ db.serialize(() => {
     )`
   );
 
-  db.run('INSERT INTO users(id, user_name, display_name) VALUES(?, ?, ?)', [1, 'jasonlin', 'Jason Lin'], (err) => {
+  db.run('INSERT INTO users(id, user_name, display_name, country, date_of_birth, habit) VALUES(?, ?, ?, ?, ? ,?)', [1, 'jasonlin', 'Jason Lin', '台灣', '1989-09-03', '當宅男'], (err) => {
     if (err) {
       return console.log(err.message);
     }

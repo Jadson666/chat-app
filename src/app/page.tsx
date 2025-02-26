@@ -69,7 +69,7 @@ export default function Home() {
             </FormItem>
           )}
         />
-        <Button type='submit'>Login</Button>
+        <Button type='submit'>Update</Button>
       </form>
     </Form>
   );

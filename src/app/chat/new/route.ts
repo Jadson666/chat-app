@@ -1,14 +1,10 @@
-import { promisify } from '@/utils/db';
+import { getDb, promisify } from '@/utils/db';
 import { type NextRequest } from 'next/server';
-import path from 'path';
-import sqlite3 from 'sqlite3';
-
-const dbPath = path.join(process.cwd(), 'chat.db');
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const { roomId, senderId, content } = body;
-  const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE);
+  const db = getDb();
 
   const lastID = await new Promise((resolve, reject) => {
     db.run(`INSERT INTO msg(sender_id, room_id, text) VALUES(?,?,?)`, [senderId, roomId, content], function (err) {

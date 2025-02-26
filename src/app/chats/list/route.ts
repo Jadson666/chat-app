@@ -1,12 +1,9 @@
+import { getDb } from '@/utils/db';
 import { type NextRequest } from 'next/server';
-import path from 'path';
-import sqlite3 from 'sqlite3';
-
-const dbPath = path.join(process.cwd(), 'chat.db');
 
 // get all chat room by a user
 export async function GET(req: NextRequest) {
-  const db = new sqlite3.Database(dbPath, sqlite3.OPEN_READWRITE);
+  const db = getDb();
   const searchParams = req.nextUrl.searchParams;
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const userId = searchParams.get('userId');
