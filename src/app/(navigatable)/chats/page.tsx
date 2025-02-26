@@ -11,7 +11,7 @@ export function MailList({ items }: { items: any[] }) {
 
   return (
     <ScrollArea className='h-screen'>
-      <div className='flex flex-col gap-2 p-4 pt-0'>
+      <div className='flex flex-col gap-2 p-4 pt-2'>
         {items.map((item) => (
           <button
             key={item.roomId}
@@ -24,7 +24,6 @@ export function MailList({ items }: { items: any[] }) {
               <div className='flex items-center'>
                 <div className='flex items-center gap-2'>
                   <div className='font-semibold'>{item.name}</div>
-                  {!item.read && <span className='flex h-2 w-2 rounded-full bg-blue-600' />}
                 </div>
               </div>
               {/* <div className='text-xs font-medium'>{item.subject}</div> */}

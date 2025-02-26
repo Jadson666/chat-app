@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { Title } from './(navigatable)/profile/page';
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -43,6 +44,7 @@ export default function Home() {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 p-8'>
+        <Title text="Start to having fun time with your new met partner"></Title>
         <FormField
           control={form.control}
           name='username'
@@ -50,7 +52,7 @@ export default function Home() {
             <FormItem>
               <FormLabel>User Name</FormLabel>
               <FormControl>
-                <Input type='text' placeholder='User Name' {...field} />
+                <Input type='text' placeholder='please enter you user name' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -63,13 +65,13 @@ export default function Home() {
             <FormItem>
               <FormLabel>Password</FormLabel>
               <FormControl>
-                <Input type='password' placeholder='Password' {...field} />
+                <Input type='password' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
         />
-        <Button type='submit'>Update</Button>
+        <Button className='w-full' type='submit'>Login</Button>
       </form>
     </Form>
   );

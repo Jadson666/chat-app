@@ -45,9 +45,9 @@ export const UserProfile = () => {
       startTransition(async () => {
         const res = await fetch('/profile/data?' + new URLSearchParams({ userId: user.id }).toString());
         const json = await res.json();
-        form.setValue('habit', json.user.habit);
-        form.setValue('country', json.user.country);
-        form.setValue('dateOfBirth', json.user.date_of_birth);
+        form.setValue('habit', json.user.habit ?? '');
+        form.setValue('country', json.user.country ?? '');
+        form.setValue('dateOfBirth', json.user.date_of_birth ?? '');
       })
     };
 
@@ -56,7 +56,7 @@ export const UserProfile = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 p-8'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 pt-8'>
         <FormField
           control={form.control}
           name='habit'
@@ -77,7 +77,7 @@ export const UserProfile = () => {
             <FormItem>
               <FormLabel>Country</FormLabel>
               <FormControl>
-                <Input disabled={isPending} type='text' placeholder='COuntry' {...field} />
+                <Input disabled={isPending} type='text' placeholder='Country' {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
